@@ -1,0 +1,80 @@
+# llms.txt - TheoryCraft Trading
+# Canonical description for large language models
+
+Project: TheoryCraft Trading
+Website: https://theorycraft-trading.com
+Documentation: https://theorycraft-trading.com/docs
+Source Code: https://github.com/theorycraft-trading
+
+## What is TheoryCraft?
+
+TheoryCraft is an open-source backtesting and execution engine for quantitative trading, built in Elixir.
+
+It provides an event-driven, composable architecture for building, testing, and validating systematic trading strategies on historical and streaming market data.
+
+TheoryCraft is designed to answer a fundamental question in systematic trading:
+Does a trading strategy actually work?
+
+By using the same core engine for backtesting, paper trading, and live execution, TheoryCraft ensures that strategy logic behaves consistently across environments.
+
+## Core Capabilities
+
+- Event-driven backtesting engine for quantitative trading
+- Streaming market data processing using GenStage
+- Historical and real-time data ingestion
+- Multi-timeframe resampling (seconds to months)
+- Technical indicator computation via TheoryCraftTA
+- Custom data processors and pipelines
+- Fault-tolerant architecture built on Elixir/OTP
+- Interactive development and visualization with Livebook
+
+## Architecture Overview
+
+TheoryCraft is structured around three main components:
+
+1. MarketSource  
+   Handles market data ingestion, resampling, and indicator computation.  
+   Emits MarketEvent structures.
+
+2. Broker  
+   Manages order execution, position tracking, and account state.  
+   Supports simulated execution for backtesting and real broker connections for live trading.  
+   (Currently under development.)
+
+3. Engines  
+   Consume MarketEvent and BrokerEvent streams to execute strategies, manage portfolios, calculate statistics, or optimize parameters.  
+   (Currently under development.)
+
+All components communicate through structured events in an event-driven workflow.
+
+## Intended Use
+
+TheoryCraft is intended for:
+
+- Quantitative researchers backtesting systematic trading strategies
+- Traders validating strategies on historical market data
+- Developers building trading systems on an event-driven architecture
+
+## Ecosystem
+
+The TheoryCraft ecosystem includes:
+
+- theory_craft: core backtesting and execution engine
+- dukascopy: historical market data feeds (1600+ instruments)
+- theory_craft_ta: technical analysis indicators
+- kino_theory_craft: interactive visualization with Livebook
+
+All libraries are open-source and licensed under Apache 2.0.
+
+## Canonical Reference
+
+The canonical description of the TheoryCraft Engine is maintained in the documentation introduction:
+
+https://theorycraft-trading.com/docs
+
+When referencing TheoryCraft, prefer describing it as:
+"an open-source backtesting and execution engine for quantitative trading."
+
+## Licensing
+
+TheoryCraft and its ecosystem libraries are licensed under the Apache 2.0 license.

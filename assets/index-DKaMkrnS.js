@@ -26,6 +26,7 @@ No matching component was found for:
 `,(0,M.jsx)(t.p,{children:`By providing a unified backtesting and execution engine, TheoryCraft
 enables systematic strategies to be tested on historical data, validated
 statistically, and executed consistently across backtest, paper, and live environments.`}),`
+`,(0,M.jsx)(t.p,{children:`This documentation describes the TheoryCraft Engine and its core components.`}),`
 `,(0,M.jsx)(t.h2,{id:`why-backtesting-matters`,children:`Why Backtesting Matters`}),`
 `,(0,M.jsx)(t.p,{children:`Systematic trading relies on data-driven validation. Before deploying capital, traders and researchers need to verify that their strategies perform as expected across different market conditions.`}),`
 `,(0,M.jsx)(t.p,{children:`A backtesting engine allows you to:`}),`
@@ -54,10 +55,10 @@ statistically, and executed consistently across backtest, paper, and live enviro
 `,(0,M.jsx)(t.h2,{id:`core-concepts`,children:`Core Concepts`}),`
 `,(0,M.jsx)(t.p,{children:`TheoryCraft organizes trading system development around three main components.`}),`
 `,(0,M.jsx)(t.h3,{id:`marketsource`,children:`MarketSource`}),`
-`,(0,M.jsx)(t.p,{children:`Handles market data ingestion, timeframe resampling, and indicator computation. Emits MarketEvent structures to downstream components.`}),`
+`,(0,M.jsxs)(t.p,{children:[`Handles market data ingestion, timeframe resampling, and indicator computation. Emits `,(0,M.jsx)(t.strong,{children:`MarketEvent`}),` structures to downstream components.`]}),`
 `,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.a,{href:`/docs/concepts/datafeed`,children:`Learn more about MarketSource and DataFeeds →`})}),`
 `,(0,M.jsx)(t.h3,{id:`broker`,children:`Broker`}),`
-`,(0,M.jsx)(t.p,{children:`Manages order execution, position tracking, and account state. Supports simulated execution for backtesting and real broker connections for live trading.`}),`
+`,(0,M.jsxs)(t.p,{children:[`Manages order execution, position tracking, and account state. Emits `,(0,M.jsx)(t.strong,{children:`BrokerEvent`}),` structures for order updates and position changes. Supports simulated execution for backtesting and real broker connections for live trading.`]}),`
 `,(0,M.jsxs)(t.p,{children:[`⚠️ `,(0,M.jsx)(t.em,{children:`Currently in development.`})]}),`
 `,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.a,{href:`/docs/concepts/broker`,children:`Learn more about Broker →`})}),`
 `,(0,M.jsx)(t.h3,{id:`engines`,children:`Engines`}),`
@@ -96,7 +97,10 @@ while others are being built incrementally.`]}),`
 `,(0,M.jsx)(t.p,{children:`Continue with the documentation to learn how to use TheoryCraft:`}),`
 `,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Concepts`}),` - Understand the architecture and components`]}),`
 `,(0,M.jsxs)(t.ul,{children:[`
-`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/datafeed`,children:`Understanding DataFeeds`}),` - How market data enters the system`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/datafeed`,children:`MarketSource & DataFeeds`}),` - How market data enters the system`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/broker`,children:`Broker`}),` - Order execution and position management`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/engines`,children:`Engines`}),` - Strategy execution and analysis`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/event-driven-workflow`,children:`Event-Driven Workflow`}),` - How components communicate`]}),`
 `]}),`
 `,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Guides`}),` - Step-by-step instructions for common tasks`]}),`
 `,(0,M.jsxs)(t.ul,{children:[`
@@ -120,134 +124,316 @@ while others are being built incrementally.`]}),`
 `]}),`
 `,(0,M.jsx)(t.p,{children:`Report issues and contribute on GitHub. All repositories welcome contributions.`}),`
 `,(0,M.jsx)(t.h2,{id:`license`,children:`License`}),`
-`,(0,M.jsx)(t.p,{children:`TheoryCraft and its ecosystem libraries are open-source software licensed under Apache 2.0.`})]})}function No(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Mo,{...e})}):Mo(e)}const Po={title:`Understanding DataFeeds`,description:`Learn what DataFeeds are in TheoryCraft, how they provide market data to your backtesting pipelines, and how to implement custom data sources.`,keywords:[`datafeed`,`market data`,`OHLC`,`ticks`,`candlestick`,`trading data`]};function Fo(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,ol:`ol`,p:`p`,pre:`pre`,span:`span`,strong:`strong`,table:`table`,tbody:`tbody`,td:`td`,th:`th`,thead:`thead`,tr:`tr`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`understanding-datafeeds`,children:`Understanding DataFeeds`}),`
-`,(0,M.jsxs)(t.p,{children:[`A `,(0,M.jsx)(t.strong,{children:`DataFeed`}),` is a source of market data that streams price information into your TheoryCraft pipeline. It's the foundation of any backtesting or live trading system.`]}),`
-`,(0,M.jsx)(t.h2,{id:`what-is-a-datafeed`,children:`What is a DataFeed?`}),`
-`,(0,M.jsxs)(t.p,{children:[`In TheoryCraft, a DataFeed is a module that implements the `,(0,M.jsx)(t.code,{children:`TheoryCraft.DataFeed`}),` behaviour. It's responsible for:`]}),`
-`,(0,M.jsxs)(t.ol,{children:[`
-`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Fetching raw market data`}),` from a source (files, APIs, databases)`]}),`
-`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Converting data`}),` into TheoryCraft's internal format`]}),`
-`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Streaming events`}),` through GenStage for processing`]}),`
+`,(0,M.jsx)(t.p,{children:`TheoryCraft and its ecosystem libraries are open-source software licensed under Apache 2.0.`})]})}function No(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Mo,{...e})}):Mo(e)}const Po={title:`MarketSource and DataFeeds - Market Data Ingestion`,description:`Learn how TheoryCraft handles market data through MarketSource and DataFeeds, including data types, timeframes, resampling, and available data sources.`,keywords:[`MarketSource`,`datafeed`,`market data`,`OHLC`,`ticks`,`candlestick`,`trading data`,`backtesting`]};function Fo(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,ol:`ol`,p:`p`,pre:`pre`,span:`span`,strong:`strong`,table:`table`,tbody:`tbody`,td:`td`,th:`th`,thead:`thead`,tr:`tr`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`marketsource-and-datafeeds`,children:`MarketSource and DataFeeds`}),`
+`,(0,M.jsx)(t.p,{children:`Market data is the foundation of any trading system. TheoryCraft provides a flexible architecture for ingesting, transforming, and streaming market data through DataFeeds and MarketSource.`}),`
+`,(0,M.jsx)(t.h2,{id:`why-data-quality-matters`,children:`Why Data Quality Matters`}),`
+`,(0,M.jsx)(t.p,{children:`Data is the most critical element in backtesting. A strategy is only as good as the data used to test it. Poor data quality or improper data handling renders backtests meaningless-live trading results will diverge significantly from historical simulations.`}),`
+`,(0,M.jsx)(t.p,{children:`Common data problems that invalidate backtests:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Look-ahead bias`}),` - Using future information that wasn't available at decision time`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Missing data`}),` - Gaps that hide important market events`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Incorrect timestamps`}),` - Events processed out of order`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Bad prices`}),` - Spikes, gaps, or errors in price data`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Survivorship bias`}),` - Testing on today's S&P 500 composition excludes companies like Lehman Brothers or Enron that went bankrupt, artificially inflating historical returns`]}),`
 `]}),`
-`,(0,M.jsx)(t.p,{children:`Think of it as an adapter between external data sources and your trading strategy.`}),`
+`,(0,M.jsx)(t.p,{children:`TheoryCraft addresses these challenges through an event-driven architecture rather than a vectorized approach. While vectorized engines process entire arrays of historical data at once, event-driven systems replay market data tick-by-tick or bar-by-bar, exactly as it would arrive in live trading.`}),`
+`,(0,M.jsx)(t.p,{children:`This design choice prioritizes accuracy over raw speed. By processing events sequentially with proper timestamps, TheoryCraft reproduces market conditions as faithfully as possible. Your strategy sees the same data flow in backtesting as it would in live trading, eliminating an entire class of simulation artifacts.`}),`
+`,(0,M.jsxs)(t.p,{children:[`The goal is simple: `,(0,M.jsx)(t.strong,{children:`backtests that translate reliably to live performance`}),`.`]}),`
+`,(0,M.jsx)(t.h2,{id:`what-is-marketsource`,children:`What is MarketSource?`}),`
+`,(0,M.jsx)(t.p,{children:`MarketSource is the main orchestrator for market data in TheoryCraft. It manages the entire data pipeline, from raw data ingestion to processed events ready for strategy consumption.`}),`
+`,(0,M.jsx)(t.p,{children:`MarketSource combines two types of components:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`DataFeed`}),` - Handles data ingestion from external sources`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Processors`}),` - Transform and compute on the data (resampling, indicators, filters)`]}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`Together, these components form a streaming pipeline that emits MarketEvent structures to downstream Engines.`}),`
+`,(0,M.jsx)(t.h2,{id:`what-is-a-datafeed`,children:`What is a DataFeed?`}),`
+`,(0,M.jsx)(t.p,{children:`A DataFeed is the component within MarketSource responsible for data ingestion. It connects to external data sources (files, APIs, databases) and streams raw price data into the pipeline.`}),`
+`,(0,M.jsxs)(t.p,{children:[`In TheoryCraft, DataFeeds implement the `,(0,M.jsx)(t.code,{children:`TheoryCraft.DataFeed`}),` behaviour and are responsible for:`]}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Fetching raw market data from a source`}),`
+`,(0,M.jsx)(t.li,{children:`Converting data into TheoryCraft's internal format (Tick or Bar)`}),`
+`,(0,M.jsx)(t.li,{children:`Streaming data into the MarketSource pipeline`}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`Think of a DataFeed as an adapter between external data and TheoryCraft.`}),`
+`,(0,M.jsx)(t.h2,{id:`what-are-processors`,children:`What are Processors?`}),`
+`,(0,M.jsx)(t.p,{children:`Processors are the compute layer within MarketSource. They transform, filter, and enrich the data stream. Common processors include:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Resampler`}),` - Converts tick data to bars or aggregates bars to higher timeframes`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Indicators`}),` - Computes technical indicators (SMA, RSI, MACD, etc.)`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Filters`}),` - Removes or flags invalid data points`]}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`Processors can be chained together and independent processors can run in parallel for better performance.`}),`
 `,(0,M.jsx)(t.h2,{id:`types-of-market-data`,children:`Types of Market Data`}),`
-`,(0,M.jsx)(t.p,{children:`DataFeeds can provide different types of market data:`}),`
 `,(0,M.jsx)(t.h3,{id:`tick-data`,children:`Tick Data`}),`
-`,(0,M.jsx)(t.p,{children:`The most granular form of market data. Each tick represents a single price update:`}),`
+`,(0,M.jsx)(t.p,{children:`The most granular form of market data. Each tick represents a single price update with bid, ask, and volume information.`}),`
 `,(0,M.jsx)(M.Fragment,{children:(0,M.jsx)(t.pre,{className:`shiki github-dark`,style:{backgroundColor:`#24292e`,color:`#e1e4e8`},tabIndex:`0`,children:(0,M.jsxs)(t.code,{children:[(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`%`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`Tick`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`{`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  timestamp:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` ~U[2024-01-15 09:30:00.123Z]`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
+`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  time:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` ~U[2024-01-15 14:30:00.123Z]`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
 `,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  bid:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08542`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  ask:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08544`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
+`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  ask:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08545`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
 `,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  bid_volume:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.5`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
 `,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  ask_volume:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 2.0`})]}),`
 `,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`}`})})]})})}),`
-`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Use cases`}),`: High-frequency strategies, spread analysis, order flow`]}),`
+`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Use cases:`}),` High-frequency strategies, spread analysis, order flow`]}),`
 `,(0,M.jsx)(t.h3,{id:`ohlc-bars-candlesticks`,children:`OHLC Bars (Candlesticks)`}),`
-`,(0,M.jsx)(t.p,{children:`Aggregated price data over a time period:`}),`
+`,(0,M.jsx)(t.p,{children:`Aggregated price data over a time period. Each bar contains open, high, low, close prices and volume.`}),`
 `,(0,M.jsx)(M.Fragment,{children:(0,M.jsx)(t.pre,{className:`shiki github-dark`,style:{backgroundColor:`#24292e`,color:`#e1e4e8`},tabIndex:`0`,children:(0,M.jsxs)(t.code,{children:[(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`%`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`Bar`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`{`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  timestamp:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` ~U[2024-01-15 09:30:00Z]`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
+`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  time:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` ~U[2024-01-15 14:30:00Z]`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
 `,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  open:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08540`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
 `,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  high:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08560`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
 `,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  low:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08535`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  close:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08555`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
+`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  close:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1.08552`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
 `,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`  volume:`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:` 1250.5`})]}),`
 `,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`}`})})]})})}),`
-`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Use cases`}),`: Technical analysis, trend following, most trading strategies`]}),`
-`,(0,M.jsx)(t.h3,{id:`timeframes`,children:`Timeframes`}),`
-`,(0,M.jsx)(t.p,{children:`Common timeframe abbreviations in TheoryCraft:`}),`
-`,(0,M.jsxs)(t.table,{children:[(0,M.jsx)(t.thead,{children:(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.th,{children:`Code`}),(0,M.jsx)(t.th,{children:`Meaning`}),(0,M.jsx)(t.th,{children:`Example`})]})}),(0,M.jsxs)(t.tbody,{children:[(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`t1`})}),(0,M.jsx)(t.td,{children:`1 tick`}),(0,M.jsx)(t.td,{children:`Raw tick data`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`s30`})}),(0,M.jsx)(t.td,{children:`30 seconds`}),(0,M.jsx)(t.td,{children:`30-second bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`m1`})}),(0,M.jsx)(t.td,{children:`1 minute`}),(0,M.jsx)(t.td,{children:`1-minute bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`m5`})}),(0,M.jsx)(t.td,{children:`5 minutes`}),(0,M.jsx)(t.td,{children:`5-minute bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`m15`})}),(0,M.jsx)(t.td,{children:`15 minutes`}),(0,M.jsx)(t.td,{children:`15-minute bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`h1`})}),(0,M.jsx)(t.td,{children:`1 hour`}),(0,M.jsx)(t.td,{children:`Hourly bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`h4`})}),(0,M.jsx)(t.td,{children:`4 hours`}),(0,M.jsx)(t.td,{children:`4-hour bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`D1`})}),(0,M.jsx)(t.td,{children:`1 day`}),(0,M.jsx)(t.td,{children:`Daily bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`W1`})}),(0,M.jsx)(t.td,{children:`1 week`}),(0,M.jsx)(t.td,{children:`Weekly bars`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`M1`})}),(0,M.jsx)(t.td,{children:`1 month`}),(0,M.jsx)(t.td,{children:`Monthly bars`})]})]})]}),`
-`,(0,M.jsx)(t.h2,{id:`the-datafeed-behaviour`,children:`The DataFeed Behaviour`}),`
-`,(0,M.jsxs)(t.p,{children:[`To create a custom DataFeed, implement the `,(0,M.jsx)(t.code,{children:`TheoryCraft.DataFeed`}),` behaviour:`]}),`
-`,(0,M.jsx)(M.Fragment,{children:(0,M.jsx)(t.pre,{className:`shiki github-dark`,style:{backgroundColor:`#24292e`,color:`#e1e4e8`},tabIndex:`0`,children:(0,M.jsxs)(t.code,{children:[(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`defmodule`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` MyDataFeed`}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:` do`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`  @behaviour `}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`TheoryCraft`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`DataFeed`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`  @impl `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`true`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  def`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` stream`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(opts) `}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`do`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`    # Return a Stream of market events`})}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`    opts`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`    |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` fetch_data`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`()`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`    |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` Stream`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`map`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(&parse_event`}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`/`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`1`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`)`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  end`})}),`
-`,(0,M.jsx)(t.span,{className:`line`}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  defp`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` fetch_data`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(opts) `}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`do`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`    # Your data fetching logic`})}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  end`})}),`
-`,(0,M.jsx)(t.span,{className:`line`}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  defp`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` parse_event`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(raw) `}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`do`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`    # Convert to TheoryCraft format`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`    %`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`TheoryCraft`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`Event`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`{`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`      timestamp:`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` raw.time,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`      data:`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` %`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`Bar`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`{`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`        open:`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` raw.o,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`        high:`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` raw.h,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`        low:`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` raw.l,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`        close:`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` raw.c,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`        volume:`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` raw.v`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`      }`})}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`    }`})}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  end`})}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`end`})})]})})}),`
-`,(0,M.jsx)(t.h2,{id:`using-datafeeds-with-marketsource`,children:`Using DataFeeds with MarketSource`}),`
-`,(0,M.jsxs)(t.p,{children:[`The `,(0,M.jsx)(t.code,{children:`MarketSource`}),` module manages one or more DataFeeds:`]}),`
-`,(0,M.jsx)(M.Fragment,{children:(0,M.jsx)(t.pre,{className:`shiki github-dark`,style:{backgroundColor:`#24292e`,color:`#e1e4e8`},tabIndex:`0`,children:(0,M.jsxs)(t.code,{children:[(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`alias`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` TheoryCraft`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`MarketSource`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`market `}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`=`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` %`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`{}`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`  # Add a DataFeed`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`add_data`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`({`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`MyDataFeed`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`    instrument:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "EUR/USD"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`    from:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` ~D[2024-01-01]`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`,`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`    to:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` ~D[2024-12-31]`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`  })`})}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`  # Resample to different timeframes`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`resample`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:`"m5"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`, `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`name:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "EURUSD_m5"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`)`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`resample`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:`"h1"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`, `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`name:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "EURUSD_h1"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`)`})]})]})})}),`
-`,(0,M.jsx)(t.h2,{id:`data-resampling`,children:`Data Resampling`}),`
-`,(0,M.jsx)(t.p,{children:`TheoryCraft can automatically resample tick data or lower timeframes into higher ones:`}),`
-`,(0,M.jsx)(M.Fragment,{children:(0,M.jsx)(t.pre,{className:`shiki github-dark`,style:{backgroundColor:`#24292e`,color:`#e1e4e8`},tabIndex:`0`,children:(0,M.jsxs)(t.code,{children:[(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`# Start with tick data`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`market `}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`=`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:` %`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`{}`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`add_data`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`({`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`TickDataFeed`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`, `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`instrument:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "BTC/USD"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`})`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`  # Resample to 1-minute bars`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`resample`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:`"m1"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`, `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`name:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "BTCUSD_m1"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`)`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`  # Further resample to 5-minute bars`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`  |>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` MarketSource`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`resample`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:`"m5"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`, `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`name:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "BTCUSD_m5"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`, `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`source:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "BTCUSD_m1"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`)`})]})]})})}),`
-`,(0,M.jsx)(t.h2,{id:`available-datafeeds`,children:`Available DataFeeds`}),`
-`,(0,M.jsx)(t.p,{children:`TheoryCraft provides official DataFeed implementations:`}),`
-`,(0,M.jsx)(t.h3,{id:`dukascopy-datafeed`,children:`Dukascopy DataFeed`}),`
-`,(0,M.jsx)(t.p,{children:`Free historical data for 1600+ instruments from Dukascopy Bank:`}),`
-`,(0,M.jsx)(M.Fragment,{children:(0,M.jsx)(t.pre,{className:`shiki github-dark`,style:{backgroundColor:`#24292e`,color:`#e1e4e8`},tabIndex:`0`,children:(0,M.jsx)(t.code,{children:(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`{`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`:dukascopy`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`, `}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`github:`}),(0,M.jsx)(t.span,{style:{color:`#9ECBFF`},children:` "theorycraft-trading/dukascopy"`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`}`})]})})})}),`
-`,(0,M.jsxs)(t.ul,{children:[`
-`,(0,M.jsx)(t.li,{children:`Forex majors and minors`}),`
-`,(0,M.jsx)(t.li,{children:`Stocks (US, EU)`}),`
-`,(0,M.jsx)(t.li,{children:`Cryptocurrencies`}),`
-`,(0,M.jsx)(t.li,{children:`Commodities`}),`
-`,(0,M.jsx)(t.li,{children:`Indices`}),`
+`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Use cases:`}),` Technical analysis, trend following, most trading strategies`]}),`
+`,(0,M.jsx)(t.h2,{id:`supported-timeframes`,children:`Supported Timeframes`}),`
+`,(0,M.jsx)(t.p,{children:`TheoryCraft can resample data to any timeframe. Common examples include:`}),`
+`,(0,M.jsxs)(t.table,{children:[(0,M.jsx)(t.thead,{children:(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.th,{children:`Code`}),(0,M.jsx)(t.th,{children:`Meaning`})]})}),(0,M.jsxs)(t.tbody,{children:[(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`t1`})}),(0,M.jsx)(t.td,{children:`1 tick (raw tick data)`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`s30`})}),(0,M.jsx)(t.td,{children:`30 seconds`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`m1`})}),(0,M.jsx)(t.td,{children:`1 minute`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`m5`})}),(0,M.jsx)(t.td,{children:`5 minutes`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`m15`})}),(0,M.jsx)(t.td,{children:`15 minutes`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`h1`})}),(0,M.jsx)(t.td,{children:`1 hour`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`h4`})}),(0,M.jsx)(t.td,{children:`4 hours`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`D1`})}),(0,M.jsx)(t.td,{children:`1 day`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`W1`})}),(0,M.jsx)(t.td,{children:`1 week`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:(0,M.jsx)(t.code,{children:`M1`})}),(0,M.jsx)(t.td,{children:`1 month`})]})]})]}),`
+`,(0,M.jsxs)(t.p,{children:[`These are just examples. You can resample to any interval (e.g., `,(0,M.jsx)(t.code,{children:`m3`}),` for 3 minutes, `,(0,M.jsx)(t.code,{children:`h2`}),` for 2 hours). The resampler processor converts lower timeframes into higher ones automatically.`]}),`
+`,(0,M.jsx)(t.h2,{id:`building-a-marketsource-pipeline`,children:`Building a MarketSource Pipeline`}),`
+`,(0,M.jsx)(t.p,{children:`A typical MarketSource pipeline:`}),`
+`,(0,M.jsxs)(t.ol,{children:[`
+`,(0,M.jsx)(t.li,{children:`Configure a DataFeed with instrument and date range`}),`
+`,(0,M.jsx)(t.li,{children:`Add a resampler processor to convert to the desired timeframe`}),`
+`,(0,M.jsx)(t.li,{children:`Add indicator processors for technical analysis`}),`
+`,(0,M.jsx)(t.li,{children:`Stream the resulting MarketEvents to an Engine`}),`
 `]}),`
-`,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.a,{href:`/docs/guides/dukascopy`,children:`Learn more about Dukascopy DataFeed`})}),`
+`,(0,M.jsx)(t.p,{children:`MarketSource coordinates the DataFeed and Processors into a unified streaming pipeline, handling backpressure and parallelization automatically.`}),`
+`,(0,M.jsx)(t.h2,{id:`available-datafeeds`,children:`Available DataFeeds`}),`
+`,(0,M.jsx)(t.h3,{id:`dukascopy-datafeed`,children:`Dukascopy DataFeed`}),`
+`,(0,M.jsx)(t.p,{children:`Free historical data from Dukascopy Bank for 1600+ instruments:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Forex:`}),` Majors, minors, and exotic pairs`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Equities:`}),` US and European stocks`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Cryptocurrencies:`}),` Major crypto pairs`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Commodities:`}),` Precious metals, energy`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Indices:`}),` Major global indices`]}),`
+`]}),`
+`,(0,M.jsxs)(t.p,{children:[`The `,(0,M.jsx)(t.a,{href:`https://github.com/theorycraft-trading/dukascopy`,children:`Dukascopy library`}),` is stable and ready for use.`]}),`
+`,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.a,{href:`/docs/guides/dukascopy`,children:`Dukascopy DataFeed Guide →`})}),`
+`,(0,M.jsx)(t.h3,{id:`custom-datafeeds`,children:`Custom DataFeeds`}),`
+`,(0,M.jsxs)(t.p,{children:[`You can create custom DataFeeds by implementing the `,(0,M.jsx)(t.code,{children:`TheoryCraft.DataFeed`}),` behaviour. This allows integration with any data source: proprietary databases, broker APIs, or real-time feeds.`]}),`
 `,(0,M.jsx)(t.h2,{id:`best-practices`,children:`Best Practices`}),`
-`,(0,M.jsx)(t.h3,{id:`1-stream-dont-load`,children:`1. Stream, Don't Load`}),`
-`,(0,M.jsx)(t.p,{children:`Always use streaming to process data:`}),`
-`,(0,M.jsx)(M.Fragment,{children:(0,M.jsx)(t.pre,{className:`shiki github-dark`,style:{backgroundColor:`#24292e`,color:`#e1e4e8`},tabIndex:`0`,children:(0,M.jsxs)(t.code,{children:[(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`# Good - streams data`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`DataFeed`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`stream`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(opts)`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`|>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` Stream`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`each`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(&process`}),(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`/`}),(0,M.jsx)(t.span,{style:{color:`#79B8FF`},children:`1`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`)`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`|>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` Stream`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`run`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`()`})]}),`
-`,(0,M.jsx)(t.span,{className:`line`}),`
-`,(0,M.jsx)(t.span,{className:`line`,children:(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`# Bad - loads everything into memory`})}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`DataFeed`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`stream`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`(opts)`})]}),`
-`,(0,M.jsxs)(t.span,{className:`line`,children:[(0,M.jsx)(t.span,{style:{color:`#F97583`},children:`|>`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:` Enum`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`.`}),(0,M.jsx)(t.span,{style:{color:`#B392F0`},children:`to_list`}),(0,M.jsx)(t.span,{style:{color:`#E1E4E8`},children:`()  `}),(0,M.jsx)(t.span,{style:{color:`#6A737D`},children:`# Don't do this with large datasets!`})]})]})})}),`
-`,(0,M.jsx)(t.h3,{id:`2-handle-gaps`,children:`2. Handle Gaps`}),`
-`,(0,M.jsx)(t.p,{children:`Market data often has gaps (weekends, holidays). Your strategy should handle missing bars gracefully.`}),`
-`,(0,M.jsx)(t.h3,{id:`3-validate-data-quality`,children:`3. Validate Data Quality`}),`
-`,(0,M.jsx)(t.p,{children:`Check for:`}),`
+`,(0,M.jsx)(t.h3,{id:`stream-dont-load`,children:`Stream, Don't Load`}),`
+`,(0,M.jsx)(t.p,{children:`Always use streaming to process data. Loading entire datasets into memory defeats the purpose of TheoryCraft's streaming architecture and can cause memory issues with large datasets.`}),`
+`,(0,M.jsx)(t.h3,{id:`handle-data-gaps`,children:`Handle Data Gaps`}),`
+`,(0,M.jsx)(t.p,{children:`Market data often has gaps (weekends, holidays, trading halts). Design your strategy to handle missing bars gracefully.`}),`
+`,(0,M.jsx)(t.h3,{id:`validate-data-quality`,children:`Validate Data Quality`}),`
+`,(0,M.jsx)(t.p,{children:`Check for data quality issues:`}),`
 `,(0,M.jsxs)(t.ul,{children:[`
 `,(0,M.jsx)(t.li,{children:`Missing timestamps`}),`
 `,(0,M.jsx)(t.li,{children:`Invalid prices (negative, zero, or extreme values)`}),`
-`,(0,M.jsx)(t.li,{children:`Incorrect OHLC relationships (high < low, etc.)`}),`
+`,(0,M.jsx)(t.li,{children:`Incorrect OHLC relationships (high < low)`}),`
 `]}),`
 `,(0,M.jsx)(t.h2,{id:`next-steps`,children:`Next Steps`}),`
 `,(0,M.jsxs)(t.ul,{children:[`
 `,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/guides/dukascopy`,children:`Dukascopy DataFeed Guide`}),` - Get started with free historical data`]}),`
 `,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/guides/visualization`,children:`Visualization with Kino`}),` - Visualize your data in Livebook`]}),`
-`]})]})}function Io(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Fo,{...e})}):Fo(e)}const Lo={title:`Dukascopy DataFeed Guide`,description:`Download and stream free historical market data from Dukascopy Bank for forex, stocks, crypto, and more using the TheoryCraft Dukascopy library.`,keywords:[`dukascopy`,`historical data`,`forex data`,`market data download`,`free trading data`,`elixir`]};function Ro(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,p:`p`,pre:`pre`,span:`span`,table:`table`,tbody:`tbody`,td:`td`,th:`th`,thead:`thead`,tr:`tr`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`dukascopy-datafeed-guide`,children:`Dukascopy DataFeed Guide`}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/event-driven-workflow`,children:`Event-Driven Workflow`}),` - See how MarketSource fits in the architecture`]}),`
+`]})]})}function Io(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Fo,{...e})}):Fo(e)}const Lo={title:`Broker - Order Execution and Position Management`,description:`Learn about the Broker component in TheoryCraft, which handles order execution, position tracking, and account management for backtesting and live trading.`,keywords:[`broker`,`order execution`,`position management`,`trading`,`backtesting`,`live trading`,`paper trading`]};function Ro(e){let t={a:`a`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,p:`p`,strong:`strong`,table:`table`,tbody:`tbody`,td:`td`,th:`th`,thead:`thead`,tr:`tr`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`broker`,children:`Broker`}),`
+`,(0,M.jsx)(t.p,{children:`The Broker component manages the execution side of trading in TheoryCraft. It handles order placement, position tracking, trade history, and account state.`}),`
+`,(0,M.jsxs)(t.p,{children:[`⚠️ `,(0,M.jsx)(t.strong,{children:`The Broker component is currently in development.`})]}),`
+`,(0,M.jsx)(t.h2,{id:`what-is-the-broker`,children:`What is the Broker?`}),`
+`,(0,M.jsx)(t.p,{children:`In TheoryCraft, the Broker acts as the interface between your strategy logic and order execution. Whether you are backtesting against historical data or trading live, the Broker provides a consistent API for:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Placing and managing orders`}),`
+`,(0,M.jsx)(t.li,{children:`Tracking open positions`}),`
+`,(0,M.jsx)(t.li,{children:`Maintaining trade history`}),`
+`,(0,M.jsx)(t.li,{children:`Reporting account balance and equity`}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`The Broker abstracts away the differences between simulated and real execution, allowing the same strategy code to run across all environments.`}),`
+`,(0,M.jsx)(t.h2,{id:`broker-responsibilities`,children:`Broker Responsibilities`}),`
+`,(0,M.jsx)(t.h3,{id:`order-management`,children:`Order Management`}),`
+`,(0,M.jsx)(t.p,{children:`The Broker receives order requests from Engines and handles their lifecycle:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Order submission`}),` - Validate and submit market, limit, and stop orders`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Order tracking`}),` - Monitor pending, filled, and cancelled orders`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Order modification`}),` - Update or cancel existing orders`]}),`
+`]}),`
+`,(0,M.jsx)(t.h3,{id:`position-tracking`,children:`Position Tracking`}),`
+`,(0,M.jsx)(t.p,{children:`The Broker maintains the current state of all positions:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Open positions with entry price and size`}),`
+`,(0,M.jsx)(t.li,{children:`Unrealized profit and loss`}),`
+`,(0,M.jsx)(t.li,{children:`Position history and closed trades`}),`
+`]}),`
+`,(0,M.jsx)(t.h3,{id:`account-state`,children:`Account State`}),`
+`,(0,M.jsx)(t.p,{children:`The Broker tracks account-level information:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Available balance and margin`}),`
+`,(0,M.jsx)(t.li,{children:`Total equity`}),`
+`,(0,M.jsx)(t.li,{children:`Realized profit and loss`}),`
+`]}),`
+`,(0,M.jsx)(t.h2,{id:`execution-modes`,children:`Execution Modes`}),`
+`,(0,M.jsx)(t.p,{children:`The Broker supports three execution modes with a unified API:`}),`
+`,(0,M.jsx)(t.h3,{id:`simulated-backtesting`,children:`Simulated (Backtesting)`}),`
+`,(0,M.jsx)(t.p,{children:`For backtesting, the Broker simulates order execution against historical market data. It models realistic fills based on available prices, accounting for factors such as slippage and spread.`}),`
+`,(0,M.jsx)(t.h3,{id:`paper-trading`,children:`Paper Trading`}),`
+`,(0,M.jsx)(t.p,{children:`Paper trading uses live market data with simulated execution. This allows strategy validation in real market conditions without risking capital.`}),`
+`,(0,M.jsx)(t.h3,{id:`live-trading`,children:`Live Trading`}),`
+`,(0,M.jsx)(t.p,{children:`For live trading, the Broker connects to external brokers and exchanges to execute real orders. The same strategy logic used in backtesting runs unchanged in production.`}),`
+`,(0,M.jsx)(t.h2,{id:`brokerevent`,children:`BrokerEvent`}),`
+`,(0,M.jsxs)(t.p,{children:[`The Broker emits `,(0,M.jsx)(t.strong,{children:`BrokerEvent`}),` structures to notify Engines of execution updates:`]}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Order status changes (submitted, filled, cancelled, rejected)`}),`
+`,(0,M.jsx)(t.li,{children:`Position updates (opened, modified, closed)`}),`
+`,(0,M.jsx)(t.li,{children:`Account balance changes`}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`Engines consume these events alongside MarketEvents to make trading decisions.`}),`
+`,(0,M.jsx)(t.h2,{id:`planned-integrations`,children:`Planned Integrations`}),`
+`,(0,M.jsx)(t.p,{children:`The following broker integrations are planned:`}),`
+`,(0,M.jsxs)(t.table,{children:[(0,M.jsx)(t.thead,{children:(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.th,{children:`Broker`}),(0,M.jsx)(t.th,{children:`Asset Classes`}),(0,M.jsx)(t.th,{children:`Status`})]})}),(0,M.jsxs)(t.tbody,{children:[(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:`Interactive Brokers`}),(0,M.jsx)(t.td,{children:`Stocks, Options, Futures, Forex`}),(0,M.jsx)(t.td,{children:`Planned`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:`Binance`}),(0,M.jsx)(t.td,{children:`Cryptocurrencies`}),(0,M.jsx)(t.td,{children:`Planned`})]}),(0,M.jsxs)(t.tr,{children:[(0,M.jsx)(t.td,{children:`Simulated Broker`}),(0,M.jsx)(t.td,{children:`All (backtesting)`}),(0,M.jsx)(t.td,{children:`In development`})]})]})]}),`
+`,(0,M.jsx)(t.h2,{id:`next-steps`,children:`Next Steps`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/engines`,children:`Engines`}),` - Learn how Engines consume BrokerEvents`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/event-driven-workflow`,children:`Event-Driven Workflow`}),` - Understand how components interact`]}),`
+`]})]})}function zo(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Ro,{...e})}):Ro(e)}const Bo={title:`Engines - Strategy Execution and Analysis`,description:`Learn about Engines in TheoryCraft, the components that consume market and broker events to execute trading logic, calculate statistics, and optimize parameters.`,keywords:[`engine`,`strategy execution`,`trading strategy`,`backtesting`,`portfolio management`,`optimization`]};function Vo(e){let t={a:`a`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,ol:`ol`,p:`p`,strong:`strong`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`engines`,children:`Engines`}),`
+`,(0,M.jsx)(t.p,{children:`Engines are the processing components in TheoryCraft that consume events and perform specific tasks. Each Engine receives MarketEvents and BrokerEvents, then executes its designated function.`}),`
+`,(0,M.jsxs)(t.p,{children:[`⚠️ `,(0,M.jsx)(t.strong,{children:`Engine components are currently in development.`})]}),`
+`,(0,M.jsx)(t.h2,{id:`what-are-engines`,children:`What are Engines?`}),`
+`,(0,M.jsx)(t.p,{children:`An Engine is a specialized component that processes the event stream produced by MarketSource and Broker. Unlike general-purpose processors, Engines are designed for specific high-level tasks such as running strategy logic, calculating performance metrics, or optimizing parameters.`}),`
+`,(0,M.jsx)(t.p,{children:`Each Engine:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Receives MarketEvent and BrokerEvent streams`}),`
+`,(0,M.jsx)(t.li,{children:`Performs its designated task`}),`
+`,(0,M.jsx)(t.li,{children:`Can interact with the Broker to place orders or query account state`}),`
+`]}),`
+`,(0,M.jsx)(t.h2,{id:`one-engine-per-workflow`,children:`One Engine per Workflow`}),`
+`,(0,M.jsx)(t.p,{children:`TheoryCraft follows a single-engine design: each workflow connects MarketSource and Broker to exactly one Engine. This keeps the architecture simple and predictable.`}),`
+`,(0,M.jsx)(t.p,{children:`You choose which Engine to use based on what you want to accomplish:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Testing a strategy? Use StrategyEngine`}),`
+`,(0,M.jsx)(t.li,{children:`Analyzing performance? Use StatisticsEngine`}),`
+`,(0,M.jsx)(t.li,{children:`Searching for optimal parameters? Use OptimizerEngine`}),`
+`]}),`
+`,(0,M.jsx)(t.h2,{id:`types-of-engines`,children:`Types of Engines`}),`
+`,(0,M.jsx)(t.h3,{id:`strategyengine`,children:`StrategyEngine`}),`
+`,(0,M.jsx)(t.p,{children:`Executes trading logic and generates signals. The StrategyEngine evaluates market conditions based on incoming events and decides when to enter or exit positions.`}),`
+`,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.strong,{children:`Responsibilities:`})}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Process market data and indicators`}),`
+`,(0,M.jsx)(t.li,{children:`Evaluate entry and exit conditions`}),`
+`,(0,M.jsx)(t.li,{children:`Send order requests to the Broker`}),`
+`,(0,M.jsx)(t.li,{children:`Manage trade lifecycle`}),`
+`]}),`
+`,(0,M.jsx)(t.h3,{id:`portfolioengine`,children:`PortfolioEngine`}),`
+`,(0,M.jsx)(t.p,{children:`Dynamically manages a set of strategies. The PortfolioEngine coordinates multiple strategy instances, handling allocation, risk limits, and strategy selection.`}),`
+`,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.strong,{children:`Responsibilities:`})}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Allocate capital across strategies`}),`
+`,(0,M.jsx)(t.li,{children:`Monitor aggregate risk exposure`}),`
+`,(0,M.jsx)(t.li,{children:`Enable or disable strategies based on conditions`}),`
+`]}),`
+`,(0,M.jsx)(t.h3,{id:`statisticsengine`,children:`StatisticsEngine`}),`
+`,(0,M.jsx)(t.p,{children:`Calculates performance metrics and analytics. The StatisticsEngine tracks trades and computes statistics to evaluate strategy performance.`}),`
+`,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.strong,{children:`Responsibilities:`})}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Track trade outcomes`}),`
+`,(0,M.jsx)(t.li,{children:`Calculate metrics (win rate, Sharpe ratio, maximum drawdown)`}),`
+`,(0,M.jsx)(t.li,{children:`Generate performance reports`}),`
+`]}),`
+`,(0,M.jsx)(t.h3,{id:`optimizerengine`,children:`OptimizerEngine`}),`
+`,(0,M.jsx)(t.p,{children:`Searches for optimal strategy parameters. The OptimizerEngine runs multiple backtests with different parameter combinations to find the best configuration.`}),`
+`,(0,M.jsx)(t.p,{children:(0,M.jsx)(t.strong,{children:`Responsibilities:`})}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Define parameter search space`}),`
+`,(0,M.jsx)(t.li,{children:`Execute parameter combinations`}),`
+`,(0,M.jsx)(t.li,{children:`Evaluate and rank results`}),`
+`]}),`
+`,(0,M.jsx)(t.h2,{id:`how-engines-work`,children:`How Engines Work`}),`
+`,(0,M.jsx)(t.p,{children:`A typical workflow:`}),`
+`,(0,M.jsxs)(t.ol,{children:[`
+`,(0,M.jsx)(t.li,{children:`MarketSource emits MarketEvents (price data, indicators)`}),`
+`,(0,M.jsx)(t.li,{children:`Broker emits BrokerEvents (order updates, position changes)`}),`
+`,(0,M.jsx)(t.li,{children:`Engine receives both event streams`}),`
+`,(0,M.jsx)(t.li,{children:`Engine processes events and performs its task`}),`
+`,(0,M.jsx)(t.li,{children:`Engine interacts with Broker as needed (place orders, query state)`}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`This event-driven design ensures that the same Engine logic works across backtesting, paper trading, and live trading.`}),`
+`,(0,M.jsx)(t.h2,{id:`next-steps`,children:`Next Steps`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/broker`,children:`Broker`}),` - Learn about order execution`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/event-driven-workflow`,children:`Event-Driven Workflow`}),` - See how all components connect`]}),`
+`]})]})}function Ho(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Vo,{...e})}):Vo(e)}const Uo={title:`Event-Driven Workflow - Architecture Overview`,description:`Understand the event-driven architecture of TheoryCraft, how MarketSource, Broker, and Engines communicate through structured events.`,keywords:[`event-driven`,`architecture`,`workflow`,`MarketEvent`,`BrokerEvent`,`backtesting`,`trading system`]};function Wo(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,ol:`ol`,p:`p`,pre:`pre`,strong:`strong`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`event-driven-workflow`,children:`Event-Driven Workflow`}),`
+`,(0,M.jsx)(t.p,{children:`TheoryCraft is built around an event-driven architecture that connects market data, execution, and strategy logic through structured events. This design enables consistent behavior across backtesting, paper trading, and live trading environments.`}),`
+`,(0,M.jsx)(t.h2,{id:`architecture-overview`,children:`Architecture Overview`}),`
+`,(0,M.jsx)(t.p,{children:`A TheoryCraft workflow consists of three main components:`}),`
+`,(0,M.jsx)(t.pre,{children:(0,M.jsx)(t.code,{children:`┌──────────────┐     MarketEvent     ┌──────────┐
+│ MarketSource │ ──────────────────► │          │
+└──────────────┘                     │  Engine  │
+                                     │          │
+┌──────────────┐     BrokerEvent     │          │
+│    Broker    │ ──────────────────► │          │
+└──────────────┘ ◄────────────────── └──────────┘
+                   Orders / Queries
+`})}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`MarketSource`}),` produces market data events`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Broker`}),` produces execution events and receives orders`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Engine`}),` consumes both event streams and performs its task`]}),`
+`]}),`
+`,(0,M.jsx)(t.h2,{id:`event-types`,children:`Event Types`}),`
+`,(0,M.jsx)(t.h3,{id:`marketevent`,children:`MarketEvent`}),`
+`,(0,M.jsx)(t.p,{children:`Emitted by MarketSource when new market data is available:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Price updates (ticks, bars)`}),`
+`,(0,M.jsx)(t.li,{children:`Computed indicator values`}),`
+`,(0,M.jsx)(t.li,{children:`Timeframe and instrument metadata`}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`MarketEvents flow continuously as the data source streams historical or live data.`}),`
+`,(0,M.jsx)(t.h3,{id:`brokerevent`,children:`BrokerEvent`}),`
+`,(0,M.jsx)(t.p,{children:`Emitted by Broker when execution state changes:`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`Order status updates (submitted, filled, cancelled, rejected)`}),`
+`,(0,M.jsx)(t.li,{children:`Position changes (opened, modified, closed)`}),`
+`,(0,M.jsx)(t.li,{children:`Account balance updates`}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`BrokerEvents are triggered by order activity and market movements affecting positions.`}),`
+`,(0,M.jsx)(t.h2,{id:`the-workflow`,children:`The Workflow`}),`
+`,(0,M.jsx)(t.p,{children:`A typical event flow:`}),`
+`,(0,M.jsxs)(t.ol,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Data ingestion`}),` - MarketSource loads data from DataFeeds`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Processing`}),` - MarketSource resamples timeframes and computes indicators`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Market events`}),` - MarketSource emits MarketEvents to the Engine`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Strategy logic`}),` - Engine evaluates conditions and decides on actions`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Order placement`}),` - Engine sends orders to the Broker`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Execution`}),` - Broker processes orders (simulated or real)`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`Broker events`}),` - Broker emits BrokerEvents back to the Engine`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.strong,{children:`State update`}),` - Engine updates its internal state based on execution results`]}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`This cycle repeats for each market event, creating a continuous feedback loop between market data and strategy execution.`}),`
+`,(0,M.jsx)(t.h2,{id:`same-code-multiple-environments`,children:`Same Code, Multiple Environments`}),`
+`,(0,M.jsx)(t.p,{children:`The event-driven design allows identical strategy code to run in different environments:`}),`
+`,(0,M.jsx)(t.h3,{id:`backtesting`,children:`Backtesting`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`MarketSource streams historical data from files or databases`}),`
+`,(0,M.jsx)(t.li,{children:`Broker simulates order execution against historical prices`}),`
+`,(0,M.jsx)(t.li,{children:`Time advances as fast as events can be processed`}),`
+`]}),`
+`,(0,M.jsx)(t.h3,{id:`paper-trading`,children:`Paper Trading`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`MarketSource streams live market data`}),`
+`,(0,M.jsx)(t.li,{children:`Broker simulates execution using live prices`}),`
+`,(0,M.jsx)(t.li,{children:`Time progresses in real-time`}),`
+`]}),`
+`,(0,M.jsx)(t.h3,{id:`live-trading`,children:`Live Trading`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsx)(t.li,{children:`MarketSource streams live market data`}),`
+`,(0,M.jsx)(t.li,{children:`Broker sends orders to real exchanges and brokers`}),`
+`,(0,M.jsx)(t.li,{children:`Time progresses in real-time with actual execution`}),`
+`]}),`
+`,(0,M.jsx)(t.p,{children:`The only difference is the data source and broker configuration. Strategy logic remains unchanged.`}),`
+`,(0,M.jsx)(t.h2,{id:`benefits-of-event-driven-design`,children:`Benefits of Event-Driven Design`}),`
+`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Consistency`}),` - The same logic produces the same results across environments, reducing the gap between backtest and live performance.`]}),`
+`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Testability`}),` - Strategies can be thoroughly tested on historical data before deployment.`]}),`
+`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Flexibility`}),` - Components can be swapped without changing strategy code (different data sources, different brokers).`]}),`
+`,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.strong,{children:`Scalability`}),` - Event streams can be processed in parallel using Elixir's concurrency model.`]}),`
+`,(0,M.jsx)(t.h2,{id:`next-steps`,children:`Next Steps`}),`
+`,(0,M.jsxs)(t.ul,{children:[`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/datafeed`,children:`MarketSource and DataFeeds`}),` - Learn about market data ingestion`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/broker`,children:`Broker`}),` - Understand order execution`]}),`
+`,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/engines`,children:`Engines`}),` - Explore the different Engine types`]}),`
+`]})]})}function Go(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Wo,{...e})}):Wo(e)}const Ko={title:`Dukascopy DataFeed Guide`,description:`Download and stream free historical market data from Dukascopy Bank for forex, stocks, crypto, and more using the TheoryCraft Dukascopy library.`,keywords:[`dukascopy`,`historical data`,`forex data`,`market data download`,`free trading data`,`elixir`]};function qo(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,p:`p`,pre:`pre`,span:`span`,table:`table`,tbody:`tbody`,td:`td`,th:`th`,thead:`thead`,tr:`tr`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`dukascopy-datafeed-guide`,children:`Dukascopy DataFeed Guide`}),`
 `,(0,M.jsxs)(t.p,{children:[`The `,(0,M.jsx)(t.a,{href:`https://github.com/theorycraft-trading/dukascopy`,children:`Dukascopy`}),` library provides access to free historical market data from Dukascopy Bank SA, covering 1600+ financial instruments.`]}),`
 `,(0,M.jsx)(t.h2,{id:`what-is-dukascopy`,children:`What is Dukascopy?`}),`
 `,(0,M.jsx)(t.p,{children:`Dukascopy Bank SA is a Swiss bank that provides free historical market data through their public servers. The TheoryCraft Dukascopy library makes it easy to download and stream this data directly into your backtesting pipelines.`}),`
@@ -417,7 +603,7 @@ while others are being built incrementally.`]}),`
 `,(0,M.jsxs)(t.ul,{children:[`
 `,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/concepts/datafeed`,children:`Understanding DataFeeds`}),` - Learn about DataFeed concepts`]}),`
 `,(0,M.jsxs)(t.li,{children:[(0,M.jsx)(t.a,{href:`/docs/guides/visualization`,children:`Visualization with Kino`}),` - Visualize your downloaded data`]}),`
-`]})]})}function zo(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Ro,{...e})}):Ro(e)}const Bo={title:`Visualization with Kino TheoryCraft`,description:`Create interactive trading charts and visualizations in Elixir Livebook using Kino TheoryCraft with TradingView's Lightweight Charts.`,keywords:[`livebook`,`kino`,`trading charts`,`candlestick`,`visualization`,`elixir`,`tradingview`]};function Vo(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,p:`p`,pre:`pre`,span:`span`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`visualization-with-kino-theorycraft`,children:`Visualization with Kino TheoryCraft`}),`
+`]})]})}function Jo(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(qo,{...e})}):qo(e)}const Yo={title:`Visualization with Kino TheoryCraft`,description:`Create interactive trading charts and visualizations in Elixir Livebook using Kino TheoryCraft with TradingView's Lightweight Charts.`,keywords:[`livebook`,`kino`,`trading charts`,`candlestick`,`visualization`,`elixir`,`tradingview`]};function Xo(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,p:`p`,pre:`pre`,span:`span`,ul:`ul`,...e.components};return(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(t.h1,{id:`visualization-with-kino-theorycraft`,children:`Visualization with Kino TheoryCraft`}),`
 `,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.a,{href:`https://github.com/theorycraft-trading/kino_theory_craft`,children:`Kino TheoryCraft`}),` brings interactive trading charts to Elixir Livebook, powered by TradingView's Lightweight Charts library.`]}),`
 `,(0,M.jsx)(t.h2,{id:`what-is-livebook`,children:`What is Livebook?`}),`
 `,(0,M.jsxs)(t.p,{children:[(0,M.jsx)(t.a,{href:`https://livebook.dev/`,children:`Livebook`}),` is an interactive notebook environment for Elixir, similar to Jupyter notebooks for Python. It's perfect for:`]}),`
@@ -680,7 +866,7 @@ while others are being built incrementally.`]}),`
 `,(0,M.jsxs)(t.li,{children:[`Explore the `,(0,M.jsx)(t.a,{href:`https://tradingview.github.io/lightweight-charts/`,children:`TradingView Lightweight Charts docs`}),` for advanced customization`]}),`
 `,(0,M.jsxs)(t.li,{children:[`Check out the `,(0,M.jsx)(t.a,{href:`https://github.com/theorycraft-trading/kino_theory_craft/tree/main/examples`,children:`kino_theory_craft examples`})]}),`
 `,(0,M.jsx)(t.li,{children:`Join our Discord community to share your visualizations`}),`
-`]})]})}function Ho(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Vo,{...e})}):Vo(e)}function Uo(e){(0,O.useEffect)(()=>{let t=document.title;if(e.title){let t=`${e.title} | TheoryCraft Trading`;document.title=t;let n=document.querySelector(`meta[name="title"]`);n&&n.setAttribute(`content`,t)}if(e.description){let t=document.querySelector(`meta[name="description"]`);t&&t.setAttribute(`content`,e.description)}if(e.keywords&&e.keywords.length>0){let t=document.querySelector(`meta[name="keywords"]`);t&&t.setAttribute(`content`,e.keywords.join(`, `))}return()=>{document.title=t}},[e.title,e.description,e.keywords])}function Wo({href:e,children:t,...n}){return e?.startsWith(`http://`)||e?.startsWith(`https://`)?(0,M.jsx)(`a`,{href:e,target:`_blank`,rel:`noopener noreferrer nofollow`,...n,children:t}):(0,M.jsx)(Tn,{to:e||`#`,...n,children:t})}function Go({children:e,...t}){let[n,r]=(0,O.useState)(!1),i=(0,O.useRef)(null),a=async()=>{if(!i.current)return;let e=i.current.textContent||``;await navigator.clipboard.writeText(e),r(!0),setTimeout(()=>r(!1),2e3)};return(0,M.jsxs)(`div`,{className:`relative group`,children:[(0,M.jsx)(`pre`,{ref:i,...t,children:e}),(0,M.jsx)(`button`,{onClick:a,className:`absolute top-2 right-2 p-1.5 rounded bg-base-300/80 hover:bg-base-300 text-base-content/60 hover:text-base-content opacity-0 group-hover:opacity-100 transition-opacity focus:outline-none`,"aria-label":`Copy code`,children:n?(0,M.jsx)(ir,{className:`w-4 h-4 text-success`}):(0,M.jsx)(ur,{className:`w-4 h-4`})})]})}var Ko={a:Wo,pre:Go},qo={"":{component:No,frontmatter:jo,path:`/docs`},"concepts/datafeed":{component:Io,frontmatter:Po,path:`/docs/concepts/datafeed`,category:`Concepts`},"guides/dukascopy":{component:zo,frontmatter:Lo,path:`/docs/guides/dukascopy`,category:`Guides`},"guides/visualization":{component:Ho,frontmatter:Bo,path:`/docs/guides/visualization`,category:`Guides`}},Jo=[{title:`Getting Started`,items:[{title:`Introduction`,href:`/docs`}]},{title:`Concepts`,items:[{title:`Understanding DataFeeds`,href:`/docs/concepts/datafeed`}]},{title:`Guides`,items:[{title:`Dukascopy DataFeed`,href:`/docs/guides/dukascopy`},{title:`Visualization with Kino`,href:`/docs/guides/visualization`}]}];function Yo(){let{"*":e=``}=mt(),t=qo[e],n=(0,O.useRef)(null),[r,i]=(0,O.useState)([]);if((0,O.useEffect)(()=>{if(!n.current)return;let e=n.current.querySelectorAll(`h2, h3`),t=Array.from(e).map(e=>({id:e.id,text:e.textContent||``,level:e.tagName===`H2`?2:3}));i(t)},[e]),!t)return(0,M.jsx)(`div`,{className:`min-h-screen bg-base-100`,children:(0,M.jsxs)(`div`,{className:`max-w-7xl mx-auto px-4 py-16 text-center`,children:[(0,M.jsx)(`h1`,{className:`text-4xl font-bold font-heading mb-4`,children:`Page Not Found`}),(0,M.jsx)(`p`,{className:`text-base-content/70 mb-8`,children:`The documentation page you're looking for doesn't exist.`}),(0,M.jsx)(Tn,{to:`/docs`,className:`text-accent hover:underline`,children:`Go to Documentation Home`})]})});let a=t.component,{title:o,description:s,keywords:c}=t.frontmatter;return Uo({title:o,description:s,keywords:c}),(0,M.jsx)(`div`,{className:`min-h-screen bg-base-100`,children:(0,M.jsx)(`div`,{className:`max-w-7xl mx-auto px-4 md:px-6 py-8`,children:(0,M.jsxs)(`div`,{className:`flex gap-8`,children:[(0,M.jsx)(`aside`,{className:`hidden lg:block w-64 shrink-0`,children:(0,M.jsx)(`nav`,{className:`sticky top-8 space-y-6`,children:Jo.map(t=>(0,M.jsxs)(`div`,{children:[(0,M.jsx)(`h3`,{className:`font-semibold text-sm text-base-content/50 uppercase tracking-wider mb-2`,children:t.title}),(0,M.jsx)(`ul`,{className:`space-y-1`,children:t.items.map(t=>{let n=t.href===`/docs${e?`/${e}`:``}`;return(0,M.jsx)(`li`,{children:(0,M.jsx)(Tn,{to:t.href,className:`block px-3 py-1.5 rounded text-sm transition-colors ${n?`bg-accent/10 text-accent font-medium`:`text-base-content/70 hover:text-base-content hover:bg-base-200/50`}`,children:t.title})},t.href)})})]},t.title))})}),(0,M.jsxs)(`main`,{className:`flex-1 min-w-0`,children:[(0,M.jsxs)(`nav`,{className:`flex items-center gap-2 text-sm text-accent mb-6`,children:[(0,M.jsx)(Tn,{to:`/`,className:`text-accent! no-underline! hover:underline!`,children:(0,M.jsx)(_r,{className:`w-4 h-4`})}),(0,M.jsx)(or,{className:`w-4 h-4 text-accent/50`}),(0,M.jsx)(Tn,{to:`/docs`,className:`text-accent! no-underline! hover:underline!`,children:`Docs`}),t.category&&(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(or,{className:`w-4 h-4 text-accent/50`}),(0,M.jsx)(`span`,{children:t.category})]}),o&&e&&(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(or,{className:`w-4 h-4 text-accent/50`}),(0,M.jsx)(`span`,{className:`text-base-content`,children:o})]})]}),r.length>0&&(0,M.jsxs)(`nav`,{className:`mb-8 p-6 bg-base-200/50 rounded-lg border border-base-300`,children:[(0,M.jsx)(`h2`,{className:`font-heading font-bold text-lg text-base-content mb-4`,children:`Table of Contents`}),(0,M.jsx)(`ol`,{className:`list-decimal list-inside space-y-2 text-base`,children:r.filter(e=>e.level===2).map(e=>(0,M.jsx)(`li`,{className:`text-base-content/70`,children:(0,M.jsx)(`a`,{href:`#${e.id}`,className:`underline text-accent hover:text-accent/70 transition-colors`,children:e.text})},e.id))})]}),(0,M.jsx)(`article`,{ref:n,className:`prose prose-invert max-w-none
+`]})]})}function Zo(e={}){let{wrapper:t}=e.components||{};return t?(0,M.jsx)(t,{...e,children:(0,M.jsx)(Xo,{...e})}):Xo(e)}function Qo(e){(0,O.useEffect)(()=>{let t=document.title;if(e.title){let t=`${e.title} | TheoryCraft Trading`;document.title=t;let n=document.querySelector(`meta[name="title"]`);n&&n.setAttribute(`content`,t)}if(e.description){let t=document.querySelector(`meta[name="description"]`);t&&t.setAttribute(`content`,e.description)}if(e.keywords&&e.keywords.length>0){let t=document.querySelector(`meta[name="keywords"]`);t&&t.setAttribute(`content`,e.keywords.join(`, `))}let n=document.querySelector(`link[rel="canonical"]`);if(e.path){let t=`https://theorycraft-trading.com${e.path}`;n||(n=document.createElement(`link`),n.rel=`canonical`,document.head.appendChild(n)),n.href=t}return()=>{document.title=t,n&&n.parentNode&&n.parentNode.removeChild(n)}},[e.title,e.description,e.keywords,e.path])}function $o({href:e,children:t,...n}){return e?.startsWith(`http://`)||e?.startsWith(`https://`)?(0,M.jsx)(`a`,{href:e,target:`_blank`,rel:`noopener noreferrer nofollow`,...n,children:t}):(0,M.jsx)(Tn,{to:e||`#`,...n,children:t})}function es({children:e,...t}){let[n,r]=(0,O.useState)(!1),i=(0,O.useRef)(null),a=async()=>{if(!i.current)return;let e=i.current.textContent||``;await navigator.clipboard.writeText(e),r(!0),setTimeout(()=>r(!1),2e3)};return(0,M.jsxs)(`div`,{className:`relative group`,children:[(0,M.jsx)(`pre`,{ref:i,...t,children:e}),(0,M.jsx)(`button`,{onClick:a,className:`absolute top-2 right-2 p-1.5 rounded bg-base-300/80 hover:bg-base-300 text-base-content/60 hover:text-base-content opacity-0 group-hover:opacity-100 transition-opacity focus:outline-none`,"aria-label":`Copy code`,children:n?(0,M.jsx)(ir,{className:`w-4 h-4 text-success`}):(0,M.jsx)(ur,{className:`w-4 h-4`})})]})}var ts={a:$o,pre:es},ns={"":{component:No,frontmatter:jo,path:`/docs`},"concepts/datafeed":{component:Io,frontmatter:Po,path:`/docs/concepts/datafeed`,category:`Concepts`},"concepts/broker":{component:zo,frontmatter:Lo,path:`/docs/concepts/broker`,category:`Concepts`},"concepts/engines":{component:Ho,frontmatter:Bo,path:`/docs/concepts/engines`,category:`Concepts`},"concepts/event-driven-workflow":{component:Go,frontmatter:Uo,path:`/docs/concepts/event-driven-workflow`,category:`Concepts`},"guides/dukascopy":{component:Jo,frontmatter:Ko,path:`/docs/guides/dukascopy`,category:`Guides`},"guides/visualization":{component:Zo,frontmatter:Yo,path:`/docs/guides/visualization`,category:`Guides`}},rs=[{title:`Getting Started`,items:[{title:`Introduction`,href:`/docs`}]},{title:`Concepts`,items:[{title:`MarketSource & DataFeeds`,href:`/docs/concepts/datafeed`},{title:`Broker`,href:`/docs/concepts/broker`},{title:`Engines`,href:`/docs/concepts/engines`},{title:`Event-Driven Workflow`,href:`/docs/concepts/event-driven-workflow`}]},{title:`Guides`,items:[{title:`Dukascopy DataFeed`,href:`/docs/guides/dukascopy`},{title:`Visualization with Kino`,href:`/docs/guides/visualization`}]}];function os(){let{"*":e=``}=mt(),t=ns[e],n=(0,O.useRef)(null),[r,i]=(0,O.useState)([]);if((0,O.useEffect)(()=>{if(!n.current)return;let e=n.current.querySelectorAll(`h2, h3`),t=Array.from(e).map(e=>({id:e.id,text:e.textContent||``,level:e.tagName===`H2`?2:3}));i(t)},[e]),!t)return(0,M.jsx)(`div`,{className:`min-h-screen bg-base-100`,children:(0,M.jsxs)(`div`,{className:`max-w-7xl mx-auto px-4 py-16 text-center`,children:[(0,M.jsx)(`h1`,{className:`text-4xl font-bold font-heading mb-4`,children:`Page Not Found`}),(0,M.jsx)(`p`,{className:`text-base-content/70 mb-8`,children:`The documentation page you're looking for doesn't exist.`}),(0,M.jsx)(Tn,{to:`/docs`,className:`text-accent hover:underline`,children:`Go to Documentation Home`})]})});let a=t.component,{title:o,description:s,keywords:c}=t.frontmatter;return Qo({title:o,description:s,keywords:c,path:t.path}),(0,M.jsx)(`div`,{className:`min-h-screen bg-base-100`,children:(0,M.jsx)(`div`,{className:`max-w-7xl mx-auto px-4 md:px-6 py-8`,children:(0,M.jsxs)(`div`,{className:`flex gap-8`,children:[(0,M.jsx)(`aside`,{className:`hidden lg:block w-64 shrink-0`,children:(0,M.jsx)(`nav`,{className:`sticky top-8 space-y-6`,children:rs.map(t=>(0,M.jsxs)(`div`,{children:[(0,M.jsx)(`h3`,{className:`font-semibold text-sm text-base-content/50 uppercase tracking-wider mb-2`,children:t.title}),(0,M.jsx)(`ul`,{className:`space-y-1`,children:t.items.map(t=>{let n=t.href===`/docs${e?`/${e}`:``}`;return(0,M.jsx)(`li`,{children:(0,M.jsx)(Tn,{to:t.href,className:`block px-3 py-1.5 rounded text-sm transition-colors ${n?`bg-accent/10 text-accent font-medium`:`text-base-content/70 hover:text-base-content hover:bg-base-200/50`}`,children:t.title})},t.href)})})]},t.title))})}),(0,M.jsxs)(`main`,{className:`flex-1 min-w-0`,children:[(0,M.jsxs)(`nav`,{className:`flex items-center gap-2 text-sm text-accent mb-6`,children:[(0,M.jsx)(Tn,{to:`/`,className:`text-accent! no-underline! hover:underline!`,children:(0,M.jsx)(_r,{className:`w-4 h-4`})}),(0,M.jsx)(or,{className:`w-4 h-4 text-accent/50`}),(0,M.jsx)(Tn,{to:`/docs`,className:`text-accent! no-underline! hover:underline!`,children:`Docs`}),t.category&&(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(or,{className:`w-4 h-4 text-accent/50`}),(0,M.jsx)(`span`,{children:t.category})]}),o&&e&&(0,M.jsxs)(M.Fragment,{children:[(0,M.jsx)(or,{className:`w-4 h-4 text-accent/50`}),(0,M.jsx)(`span`,{className:`text-base-content`,children:o})]})]}),r.length>0&&(0,M.jsxs)(`nav`,{className:`mb-8 p-6 bg-base-200/50 rounded-lg border border-base-300`,children:[(0,M.jsx)(`h2`,{className:`font-heading font-bold text-lg text-base-content mb-4`,children:`Table of Contents`}),(0,M.jsx)(`ol`,{className:`list-decimal list-inside space-y-2 text-base`,children:r.filter(e=>e.level===2).map(e=>(0,M.jsx)(`li`,{className:`text-base-content/70`,children:(0,M.jsx)(`a`,{href:`#${e.id}`,className:`underline text-accent hover:text-accent/70 transition-colors`,children:e.text})},e.id))})]}),(0,M.jsx)(`article`,{ref:n,className:`prose prose-invert max-w-none
                 prose-headings:font-heading prose-headings:font-bold
                 prose-h1:text-3xl
                 prose-h2:border-b prose-h2:border-base-300 prose-h2:pb-2
@@ -690,4 +876,4 @@ while others are being built incrementally.`]}),`
                 prose-pre:bg-base-200 prose-pre:border prose-pre:border-base-300 prose-pre:rounded-lg
                 prose-li:text-base-content/80
                 prose-strong:text-base-content
-              `,children:(0,M.jsx)(a,{components:Ko})})]})]})})})}function Xo(){return(0,M.jsxs)(`main`,{className:`min-h-screen`,children:[(0,M.jsx)(Pr,{}),(0,M.jsxs)(Rt,{children:[(0,M.jsx)(It,{path:`/`,element:(0,M.jsx)(Ao,{})}),(0,M.jsx)(It,{path:`/docs/*`,element:(0,M.jsx)(Yo,{})})]}),(0,M.jsx)(Ir,{})]})}var Zo=Xo,Qo=sessionStorage.getItem(`redirect`);Qo&&(sessionStorage.removeItem(`redirect`),window.history.replaceState(null,``,Qo)),(0,Un.createRoot)(document.getElementById(`root`)).render((0,M.jsx)(O.StrictMode,{children:(0,M.jsx)(Sn,{children:(0,M.jsx)(Zo,{})})}));
+              `,children:(0,M.jsx)(a,{components:ts})})]})]})})})}function ss(){return(0,M.jsxs)(`main`,{className:`min-h-screen`,children:[(0,M.jsx)(Pr,{}),(0,M.jsxs)(Rt,{children:[(0,M.jsx)(It,{path:`/`,element:(0,M.jsx)(Ao,{})}),(0,M.jsx)(It,{path:`/docs/*`,element:(0,M.jsx)(os,{})})]}),(0,M.jsx)(Ir,{})]})}var cs=ss,ls=sessionStorage.getItem(`redirect`);ls&&(sessionStorage.removeItem(`redirect`),window.history.replaceState(null,``,ls)),(0,Un.createRoot)(document.getElementById(`root`)).render((0,M.jsx)(O.StrictMode,{children:(0,M.jsx)(Sn,{children:(0,M.jsx)(cs,{})})}));
