@@ -19,6 +19,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://theorycraft-trading.com/docs/concepts/broker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theorycraft-trading.com/docs/concepts/broker/" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theorycraft-trading.com/docs/concepts/engines/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theorycraft-trading.com/docs/concepts/engines/" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theorycraft-trading.com/docs/concepts/event-driven-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theorycraft-trading.com/docs/concepts/event-driven-workflow/" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://theorycraft-trading.com/docs/guides/dukascopy/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://theorycraft-trading.com/docs/guides/dukascopy/" />
     <changefreq>weekly</changefreq>
