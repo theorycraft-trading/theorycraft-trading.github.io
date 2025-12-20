@@ -3,7 +3,7 @@
 
 Project: TheoryCraft Trading
 Website: https://theorycraft-trading.com
-Documentation: https://theorycraft-trading.com/docs
+Documentation: https://theorycraft-trading.com/docs/
 Source Code: https://github.com/theorycraft-trading
 
 ## What is TheoryCraft?
